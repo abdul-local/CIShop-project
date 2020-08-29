@@ -35,6 +35,8 @@
  * @since	Version 1.0.0
  * @filesource
  */
+//  time zone
+date_default_timezone_set('Asia/Jakarta');
 
 /*
  *---------------------------------------------------------------
