@@ -11,7 +11,7 @@ class My_Controller extends CI_Controller
     }
     // membuat method
     public function view($data){
-        $this->load->view('layouts/app',$data);
+        $this->load->view('layouts/app', $data);
     }
 }
 ?>
