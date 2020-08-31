@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct access allowed');
-class My_Model extends CI_Model{
+class MY_Model extends CI_Model{
     protected $table = ' ';
     protected $perpage= 5;
     // buat fungsi untuk construct
@@ -18,7 +18,7 @@ class My_Model extends CI_Model{
      // buat method validation input
      public function validate(){
         $this->load->library('form_validation');
-        $this->form_validation->set_error_delimeters(
+        $this->form_validation->set_error_delimiters(
             '<small class="form-text text-danger">','</small>'
 
         );
