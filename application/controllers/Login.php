@@ -5,7 +5,7 @@ class Login extends MY_Controller {
         parent:: __construct();
         $is_login = $this->session->userdata('is_login');
         if($is_login){
-            //  redirect(base_url());
+             redirect(base_url());
             return;
         }
     }
@@ -28,7 +28,7 @@ class Login extends MY_Controller {
               redirect(base_url());
         }else{
             $this->session->set_flashdata('error','E-mail atau Password sedang tidak aktive');
-            //   redirect(base_url());
+              redirect(base_url('index.php/login'));
         }
     }
 

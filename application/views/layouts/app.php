@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/navbar-fixed/">
 
     <!-- Bootstrap core CSS -->
-<link href="<?php echo base_url();?>/assets/libs/bootstrap-4.5.2-dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url('assets/libs/bootstrap-4.5.2-dist/css/bootstrap.min.css')?>" rel="stylesheet">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -25,9 +25,9 @@
     <!-- untuk css -->
     
 
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/app.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/app.css'); ?>">
     <!-- css fontawesome -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/libs/fontawsome/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/libs/fontawsome/css/all.min.css'); ?>">
   </head>
   <body>
   <!-- Navbar -->
@@ -37,7 +37,7 @@
 <?php $this->load->view($page); ?>
   <!-- endContent -->
 
-<script src="<?php  echo base_url(); ?>/assets/libs/jquery/jquery-3.5.1.min.js"></script>
-<script src="<?php echo base_url(); ?>/assets/libs/bootstrap-4.5.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?php  echo base_url('assets/libs/jquery/jquery-3.5.1.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/libs/bootstrap-4.5.2-dist/js/bootstrap.bundle.min.js'); ?>"></script>
 </body>
 </html>

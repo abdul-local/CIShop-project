@@ -11,7 +11,7 @@ class Register extends MY_Controller
 		$is_login= $this->session->userdata('is_login');
 
 		if ($is_login) {
-			//redirect(base_url());
+			redirect(base_url());
 			return;
 		}
 	}
@@ -37,7 +37,7 @@ class Register extends MY_Controller
 			redirect(base_url());
 		} else {
 			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan!');
-			redirect(base_url('/register'));
+			redirect(base_url('index.php/register'));
 		}
 	}
 	
