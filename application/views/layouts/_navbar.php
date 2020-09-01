@@ -27,7 +27,7 @@
             <a href="/login.html" class="nav-link">Login</a>
         </li>
          <li class="nav-item">
-            <a href="/register.html" class="nav-link">Register</a>
+            <a href="<?= base_url(); ?>/register" class="nav-link">Register</a>
         </li>
           <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" id="dropdown-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>

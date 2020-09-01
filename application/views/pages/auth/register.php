@@ -4,7 +4,7 @@
 <div class="col-md-8 mx-auto">
   <div class="card">
   <div class="card-header">
-    Register
+    Formulir Register
   </div>
   <div class="card-body">
    <!-- <form action=""> -->
