@@ -22,8 +22,8 @@ class MY_Model extends CI_Model{
             '<small class="form-text text-danger">','</small>'
 
         );
-        $validateRule=$this->getValidationRules();
-        $this->form_validation->set_rules($validateRule);
+        $validationRules=$this->getValidationRules();
+        $this->form_validation->set_rules($validationRules);
         return $this->form_validation->run();
 }
     //membuat method select untuk menentukan colom mana saja yang bisa di akses oleh database
