@@ -13,7 +13,7 @@
           <a href="#" class="nav-link dropdown-toggle" id="dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
           <div class="dropdown-menu" aria-labelledby="dropdown-1">
               <a href="<?= base_url('index.php/category');?>" class="dropdown-item">Kategori</a>
-              <a href="/admin-product.html" class="dropdown-item">Produk</a>
+              <a href="<?= base_url('index.php/product');?>" class="dropdown-item">Produk</a>
               <a href="/admin-corder.html" class="dropdown-item">Order</a>
               <a href="/admin-users.html" class="dropdown-item">Pengguna</a>
           </div>

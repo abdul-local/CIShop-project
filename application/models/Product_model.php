@@ -12,7 +12,7 @@ class Product_model extends MY_Model {
             'title'=>'',
             'description'=>'',
             'price'=>'',
-            'is_avaible'=>1,
+            'is_available'=>1,
             'image'=>'',
 
         ];
@@ -49,13 +49,13 @@ class Product_model extends MY_Model {
                 'rules'=>'trim|required|numeric',
             ],
             [
-                'field'=>'is_avaible',
+                'field'=>'is_available',
                 'label'=>'Ketersediaan',
                 'rules'=>'trim|required',
             ],
 
             ];
-            
+
     }
 
     
