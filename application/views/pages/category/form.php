@@ -9,13 +9,11 @@
       <?= isset($input->id) ? form_hidden('id', $input->id) : '' ?>
        <div class="form-group">
            <label>Kategori</label>
-           <!-- <input type="text" name="nama" class="form-control" onkeyup="createSlug()" id="title" required autofocus> -->
            <?= form_input('title',$input->title,['class'=>'form-control','onkeyup'=>'createSlug()','id'=>'title','required'=>true,'autofocus'=>true]);?>
-           <?= form_error('name'); ?>
+           <?= form_error('title'); ?>
        </div>
        <div class="form-group">
            <label>Slug</label>
-           <!-- <input type="text" name="nama" class="form-control" id="slug"   required> -->
            <?= form_input('slug',$input->slug,['class'=>'form-control','id'=>'slug','required'=>true,]);?>
            <?= form_error('slug'); ?>
        </div>
