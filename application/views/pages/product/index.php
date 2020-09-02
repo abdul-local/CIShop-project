@@ -36,9 +36,9 @@
            <tr>
                <td><?= $no ?></td>
                <td>
-              <p><img src="<?= $row->image ? base_url("images/product/$row->image") : base_url("images/product/default.png") ?>" alt="" height="100"><strong><?= $row->product_title ?></strong></p>
+              <p><img src="<?= $row->image ? base_url("images/product/$row->image") : base_url("images/product/default.png") ?>" alt="" height="50"><strong><?= $row->product_title ?></strong></p>
                </td>
-               <td><span class="badge badge-primary"><i class="fas fa-tags"></i><?= $row->category_title ?></span></td>
+               <td><span class="badge badge-primary"><i class="fas fa-tags"></i> <?= $row->category_title;?></span></td>
                <td>Rp<?=number_format($row->price, 0 ,',' ,'.') ?>,-</td>
                <td><?= $row->is_available ? 'Tersedia' : 'Kosong' ?></td>
                <td>
