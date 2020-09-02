@@ -1,6 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Category_model extends MY_Model{
+    protected $perPage=4;
     // method defalutvalues
     public function getDefaultValues(){
         return [
