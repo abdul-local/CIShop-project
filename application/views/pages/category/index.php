@@ -4,7 +4,7 @@
   <div class="card">
   <div class="card-header mb-3">
     <span>Kategori</span>
-    <a href="/admin-user-form.html" class="btn btn-sm btn-secondary">Tambah</a>
+    <a href="<?= base_url('index.php/category/create'); ?>" class="btn btn-sm btn-secondary">Tambah</a>
     <div class="float-right">
         <form action="">
             <div class="input-group">
