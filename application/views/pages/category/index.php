@@ -36,14 +36,16 @@
                <td><?= $row->title?></td>
                <td><?= $row->slug ?></td>
                <td>
-                      <a href="<?= base_url("index.php/category/edit/$row->id") ?>">
-                          <button class="btn btn-sm">
+                   <?= form_open("category/delete/$row->id",['method'=>'POST']); ?>
+                   <?= form_hidden('id',$row->id); ?>
+                      <a href="<?= base_url("index.php/category/edit/$row->id") ?>>" class="btn btn-sm">
                               <i class="fas fa-edit text-info"></i>
-                          </button>
-                          <button class="btn btn-sm" type="submit"  onclick ="return confirm('Are you sure ?')">
+                          <button class="btn btn-sm" type="submit"  onclick ="return confirm('Apakah yakin ingin menghapus?')">
                               <i class="fas fa-trash text-danger"></i>
                           </button>
-                      </a>
+                          </a>
+                      
+                      <?= form_close() ?>
                </td>
            </tr>
            <?php endforeach ?>
