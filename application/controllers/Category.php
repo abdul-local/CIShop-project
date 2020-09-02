@@ -22,6 +22,32 @@ class Category extends MY_Controller{
 		
 		$this->view($data);
 	}
+	// method untuk search 
+	public function search($page = null){
+		if(isset($_POST['keyword'])){
+			$this->session->set_userdata('keyword', $this->input->post('keyword'));
+		}else{
+			redirect(base_url('index.php/category'));
+		}
+		$kyeword=$this->session->userdata('keyword');
+		$data['title']		= 'Admin: Category';
+		$data['content']	= $this->category->like('title',$kyeword)->paginate($page)->get();
+		$data['total_rows']	= $this->category->like('title',$kyeword)->count();
+		$data['pagination']	= $this->category->makePagination(
+			base_url('index.php/category/search'), 3, $data['total_rows']
+		);
+		$data['page']		= 'pages/category/index';
+		
+		$this->view($data);
+
+	}
+	// method untuk reset
+	public function reset(){
+		$this->session->unset_userdata('keyword');
+		redirect(base_url('index.php/category'));
+	}
+
+
 	public function create(){
 		if(!$_POST){
 			$input = (object) $this->category->getDefaultValues();
