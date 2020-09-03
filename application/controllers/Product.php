@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit ('No script access allowed');
 
 class Product extends MY_Controller {
+    
 
     public function __construct(){
         parent::__construct();
@@ -23,12 +24,50 @@ class Product extends MY_Controller {
 			->get();
 		$data['total_rows']	= $this->product->count();
 		$data['pagination']	= $this->product->makePagination(
-			base_url('index.php/product'), 2, $data['total_rows']
+			base_url("index.php/product"), 3, $data['total_rows']
+		);
+        $data['page']		= 'pages/product/index';
+        $this->view($data);
+    }
+    // method untuk search 
+	public function search($page = null){
+		if(isset($_POST['keyword'])){
+			$this->session->set_userdata('keyword', $this->input->post('keyword'));
+		}else{
+			redirect(base_url('index.php/product'));
+		}
+		$keyword=$this->session->userdata('keyword');
+		$data['title']		= 'Admin: Product';
+        $data['content']	= $this->product->select(
+            [
+                'product.id', 'product.title AS product_title', 'product.image', 
+                'product.price', 'product.is_available',
+                'category.title AS category_title',
+            ]
+        )
+        ->join('category')
+        ->like('product.title',$keyword)
+        ->orLike('description',$keyword)
+        ->paginate($page)
+        ->get();
+    $data['total_rows']	= $this->product->count();
+    $data['pagination']	= $this->product->makePagination(
+        base_url('index.php/product'), 2, $data['total_rows']
+    );
+		$data['total_rows']	= $this->product->like('product.title',$keyword)->orLike('description',$keyword)->count();
+		$data['pagination']	= $this->product->makePagination(
+			base_url('index.php/product/search'), 3, $data['total_rows']
 		);
 		$data['page']		= 'pages/product/index';
-
+		
 		$this->view($data);
-    }
+
+	}
+	// method untuk reset
+	public function reset(){
+		$this->session->unset_userdata('keyword');
+		redirect(base_url('index.php/product'));
+	}
     // buat method create
     public function create()
 	{
