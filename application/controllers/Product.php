@@ -30,40 +30,59 @@ class Product extends MY_Controller {
 		$this->view($data);
     }
     // buat method create
-    public function create(){
-        if(!$_POST){
-            $input = $this->product->getDefaultValues();
-        }else{
-            $input = $this->input->post(null, true);
-        }
-        if(!empaty($_FILES) && $_FILES['image']['name'] !==''){
-            $imageName = url_title($input->title,'-'. date('YmdHis'));
-            $upload = $this->product->uploadImage('image',$iamgeName);
-            if($upload){
-                $input->image = $upload['file_name'];
-            }else{
-                redirect(base_url('index.php/product'));
-            }
+    public function create()
+	{
+		if (!$_POST) {
+			$input	= (object) $this->product->getDefaultValues();
+		} else {
+			$input	= (object) $this->input->post(null, true);
+		}
 
-        }
-        if(!$this->product->validate()){
-            $data['title'] = 'Tambah Produk';
-            $data['input'] = $input;
-            $data['form_action'] = base_url('product/create');
-            $data['page']='pages/product/form';
+		if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
+			$imageName	= url_title($input->title, '-', true) . '-' . date('YmdHis');
+			$upload		= $this->product->uploadImage('image', $imageName);
+			if ($upload) {
+				$input->image	= $upload['file_name'];
+			} else {
+				redirect(base_url('index.php/product/create'));
+			}
+		}
 
-            $this->view($data);
+		if (!$this->product->validate()) {
+			$data['title']			= 'Tambah Produk';
+			$data['input']			= $input;
+			$data['form_action']	= base_url('index.php/product/create');
+			$data['page']			= 'pages/product/form';
 
-            return ;
-        }
-        if($this->product->create($input)){
-            $this->session->set_flashdata('success','Data berhasil di simmpan');
-        }else{
-            $this->session->set_flashdata('error','Opps terjadi kesalhan');
-        }
+			$this->view($data);
+			return;
+		}
 
-        redirect(base_url('index.php/product'));
-    }
+		if ($this->product->create($input)) {
+			$this->session->set_flashdata('success', 'Data berhasil disimpan!');
+		} else {
+			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
+		}
+
+		redirect(base_url('index.php/product'));
+	}
+
+    public function unique_slug(){
+
+		$slug =$this->input->post('slug');
+		$id = $this->input->post('id');
+		$product =$this->product->where('slug',$slug)->first();
+		if($id == $product->id){
+			return true;
+		}
+		if($product){
+			$this->load->library('form_validation');
+			$this->form_validation->set_message('unique_slug','%s sudah di gunakan');
+			return false;
+		}
+		return true;
+	}
+
 }
 
 
