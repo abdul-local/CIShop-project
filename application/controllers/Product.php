@@ -23,7 +23,7 @@ class Product extends MY_Controller {
 			->get();
 		$data['total_rows']	= $this->product->count();
 		$data['pagination']	= $this->product->makePagination(
-			base_url('product'), 2, $data['total_rows']
+			base_url('index.php/product'), 2, $data['total_rows']
 		);
 		$data['page']		= 'pages/product/index';
 
@@ -104,6 +104,25 @@ class Product extends MY_Controller {
         }
 
         redirect(base_url("index.php/product"));
+    }
+
+    // membuat method delet untuk menghapus data product
+    public function delete($id){
+        if(!$_POST){
+            redirect(base_url('index.php/product'));
+        }
+        $product=$this->product->where('id',$id)->first();
+        if(!$product){
+            $this->session->set_flashdata('Warning', 'Maaf data tidak di temukan');
+        }
+        if($this->product->where('id',$id)->delete()){
+            $this->product->deleteImage($product->image);
+            $this->session->set_flashdata('success','Data berhasil di hapus');
+        }else{
+            $this->session->set_flashdata('error','Opps terjadi suatu kesalahan');
+        }
+
+        redirect(base_url('index.php/product'));
     }
 
     public function unique_slug(){

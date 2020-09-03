@@ -44,16 +44,16 @@
                <td>Rp<?=number_format($row->price, 0 ,',' ,'.') ?>,-</td>
                <td><?= $row->is_available ? 'Tersedia' : 'Kosong' ?></td>
                <td>
-                  <form action="">
+                  <?= form_open("product/delete/$row->id",['method'=>'POST'])?>
                   <?= form_hidden('id',$row->id); ?>
                       <a href="<?= base_url("index.php/product/edit/$row->id"); ?>">
                               <i class="fas fa-edit text-info"></i>
                           </a>
-                          <button class="btn btn-sm" type="submit"  onclick ="return confirm('Are you sure ?')">
+                          <button class="btn btn-sm" type="submit"  onclick ="return confirm('Are you sure to delete ?')">
                               <i class="fas fa-trash text-danger"></i>
                           </button>
                      
-                  </form>
+                  <?= form_close()?>
                </td>
            </tr>
         <?php endforeach; ?>
