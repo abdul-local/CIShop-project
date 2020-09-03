@@ -81,12 +81,19 @@ class Product_model extends MY_Model
 		}
 	}
 
-	public function deleteImage($fileName)
-	{
-		if (file_exists("./images/product/$fileName")) {
-			unlink("./images/product/$fileName");
-		}
-	}
+	// public function deleteImage($fileName)
+	// {
+	// 	if (file_exists("./images/product/$fileName")) {
+	// 		unlink("./images/product/$fileName");
+	// 	}
+    // }
+    
+    //method untuk menghapus file
+    public function deleteImage($fileName){
+        if(file_exists("./images/product/$fileName")){
+            unlink("./images/product/$fileName");
+        }
+    }
 
 }
 

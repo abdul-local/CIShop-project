@@ -36,21 +36,23 @@
            <tr>
                <td><?= $no ?></td>
                <td>
-              <p><img src="<?= $row->image ? base_url("images/product/$row->image") : base_url("images/product/default.png") ?>" alt="" height="50"><strong><?= $row->product_title ?></strong></p>
+              <p><img src="<?= $row->image ? base_url("images/product/$row->image") : base_url("images/product/default.png") ?>" alt="" height="50">
+              <strong><?= $row->product_title ?></strong>
+              </p>
                </td>
                <td><span class="badge badge-primary"><i class="fas fa-tags"></i> <?= $row->category_title;?></span></td>
                <td>Rp<?=number_format($row->price, 0 ,',' ,'.') ?>,-</td>
                <td><?= $row->is_available ? 'Tersedia' : 'Kosong' ?></td>
                <td>
                   <form action="">
-                      <a href="#">
-                          <button class="btn btn-sm">
+                  <?= form_hidden('id',$row->id); ?>
+                      <a href="<?= base_url("index.php/product/edit/$row->id"); ?>">
                               <i class="fas fa-edit text-info"></i>
-                          </button>
+                          </a>
                           <button class="btn btn-sm" type="submit"  onclick ="return confirm('Are you sure ?')">
                               <i class="fas fa-trash text-danger"></i>
                           </button>
-                      </a>
+                     
                   </form>
                </td>
            </tr>
