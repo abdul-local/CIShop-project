@@ -62,6 +62,70 @@ class User extends MY_Controller{
 
 		redirect(base_url('index.php/user'));
     }
+      // buat method edit
+      public function edit($id){
+        $data['content']=$this->user->where('id',$id)->first();
+        if(!$data['content']){
+            $this->session->set_flashdata('warning','maaf data tidak di temukan');
+        }
+        if(!$_POST){
+           $data['input'] =$data['content'];
+        }else{
+            $data['input']=(object) $this->input->post(null,true);
+            if($data['input']->password !== ''){
+            $data['input']->password = hashEncrypt($data['input']->password);
+
+            }else{
+                $data['input']->password = $data['content']->password;
+            }
+        }
+        if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
+			$imageName	= url_title($data['input']->name, '-', true) . '-' . date('YmdHis');
+			$upload		= $this->user->uploadImage('image', $imageName);
+			if ($upload) {
+                if($data['content']->image !==''){
+                    $this->user->deleteImage($data['content']->image);
+                }
+				$data['input']->image	= $upload['file_name'];
+			} else {
+				redirect(base_url("index.php/user/edit/$id"));
+			}
+        }
+        if (!$this->user->validate()) {
+			$data['title']			= 'Ubah Produk';
+			$data['form_action']	= base_url("index.php/user/edit/$id");
+			$data['page']			= 'pages/user/form';
+
+			$this->view($data);
+			return;
+        }
+        if($this->user->where('id',$id)->update($data['input'])){
+            $this->session->set_flashdata('success','Data berhasil di simpan');
+        }else{
+            $this->session->set_flashdata('error','opps! Terjadi suatu kesalahan');
+        }
+
+        redirect(base_url("index.php/user"));
+    }
+
+    // membuat method delet untuk menghapus data user
+    public function delete($id){
+        if(!$_POST){
+            redirect(base_url('index.php/user'));
+        }
+        $user=$this->user->where('id',$id)->first();
+        if(!$user){
+            $this->session->set_flashdata('Warning', 'Maaf data tidak di temukan');
+        }
+        if($this->user->where('id',$id)->delete()){
+            $this->user->deleteImage($user->image);
+            $this->session->set_flashdata('success','Data berhasil di hapus');
+        }else{
+            $this->session->set_flashdata('error','Opps terjadi suatu kesalahan');
+        }
+
+        redirect(base_url('index.php/user'));
+    }
 
     public function unique_email(){
 

@@ -46,16 +46,17 @@
                <td><?=$row->role; ?></td>
                <td><?= $row->is_active ? 'Active' : 'Nonactive' ?></td>
                <td>
-                  <form action="">
-                      <a href="#">
-                          <button class="btn btn-sm">
+                  <!-- <form action=""> -->
+                      <?= form_open(base_url("index.php/user/$row->id"),['method'=>'POST'])?>
+                      <?= form_hidden('id',$row->id); ?>
+                      <a href="<?= base_url("index.php/user/edit/$row->id")?>">
                               <i class="fas fa-edit text-info"></i>
-                          </button>
-                          <button class="btn btn-sm" type="submit"  onclick ="return confirm('Are you sure ?')">
+                    </a>
+                          <button class="btn btn-sm" type="submit"  onclick ="return confirm('Are you sure to delete ?')">
                               <i class="fas fa-trash text-danger"></i>
                           </button>
-                      </a>
-                  </form>
+                     
+                  <?= form_close() ?>
                </td>
            </tr>
     <?php endforeach; ?>
