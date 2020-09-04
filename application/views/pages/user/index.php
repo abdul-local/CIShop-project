@@ -6,18 +6,18 @@
   <div class="card-header mb-3">
     <span>Pengguna</span>
     <a href="<?= base_url('index.php/user/create/')?>" class="btn btn-sm btn-secondary">Tambah</a>
-    <div class="float-right">
-        <form action="">
+      <div class="float-right">
+      <?= form_open(base_url('index.php/user/search'), ['method' => 'POST']) ?>
             <div class="input-group">
-             <input type="text" class="form-control form-control-sm text-center" placeholder="Cari">
-             <div class="input-group-append">
-                 <button class="btn btn-secondary btn-sm" type="submit">
-                     <i class="fas fa-search"></i>
-                 </button>
-                 <a href="#" class="btn btn-secondary btn-sm">
-                     <i class="fas fa-eraser"></i>
-                 </a>
-             </div>
+            <input type="text" name="keyword" class="form-control form-control-sm text-center" placeholder="Cari" value="<?= $this->session->userdata('keyword') ?>">
+            <div class="input-group-append">
+			    <button class="btn btn-info btn-sm" type="submit">
+					<i class="fas fa-search"></i>
+				</button>
+						<a href="<?= base_url("index.php/user/reset") ?>" class="btn btn-info btn-sm">
+						<i class="fas fa-eraser"></i>
+						</a>
+				</div>
             </div>
         </form>
     </div>
@@ -46,8 +46,7 @@
                <td><?=$row->role; ?></td>
                <td><?= $row->is_active ? 'Active' : 'Nonactive' ?></td>
                <td>
-                  <!-- <form action=""> -->
-                      <?= form_open(base_url("index.php/user/$row->id"),['method'=>'POST'])?>
+                      <?= form_open(base_url("index.php/user/delete/$row->id"),['method'=>'POST'])?>
                       <?= form_hidden('id',$row->id); ?>
                       <a href="<?= base_url("index.php/user/edit/$row->id")?>">
                               <i class="fas fa-edit text-info"></i>

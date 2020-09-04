@@ -23,6 +23,39 @@ class User extends MY_Controller{
 
         $this->view($data);
     }
+
+    // method untuk search 
+	public function search($page = null){
+		if(isset($_POST['keyword'])){
+			$this->session->set_userdata('keyword', $this->input->post('keyword'));
+		}else{
+			redirect(base_url('index.php/user'));
+		}
+		$keyword=$this->session->userdata('keyword');
+		$data['title']		= 'Admin: user';
+        $data['content']	= $this->user
+        ->like('name',$keyword)
+        ->orLike('email',$keyword)
+        ->paginate($page)
+        ->get();
+    $data['total_rows']	= $this->user->count();
+    $data['pagination']	= $this->user->makePagination(
+        base_url('index.php/user'), 2, $data['total_rows']
+    );
+		$data['total_rows']	= $this->user->like('name',$keyword)->orLike('email',$keyword)->count();
+		$data['pagination']	= $this->user->makePagination(
+			base_url('index.php/user/search'), 3, $data['total_rows']
+		);
+		$data['page']		= 'pages/user/index';
+		
+		$this->view($data);
+
+	}
+	// method untuk reset
+	public function reset(){
+		$this->session->unset_userdata('keyword');
+		redirect(base_url('index.php/user'));
+	}
     // buat method create
     public function create()
 	{
