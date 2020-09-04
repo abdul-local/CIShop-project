@@ -25,7 +25,7 @@ class User_model extends MY_Model{
             [
                 'field'=>'email',
                 'label'=>'E-mail',
-                'rules'=>'trim|required|valid_email|callback_uniqe_email',
+                'rules'=>'trim|required|valid_email|callback_unique_email',
             ],
             [
                 'field'=>'role',
