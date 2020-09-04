@@ -60,7 +60,7 @@
        </tbody>
    </table>
       <nav aria-label="Page navigation example">
- <?= $pagination ?>
+      <?= $pagination ?>
 </nav>
   </div>
 </div>  

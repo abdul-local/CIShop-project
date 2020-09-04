@@ -24,7 +24,7 @@ class Product extends MY_Controller {
 			->get();
 		$data['total_rows']	= $this->product->count();
 		$data['pagination']	= $this->product->makePagination(
-			base_url("index.php/product"), 3, $data['total_rows']
+			base_url("index.php/product"), 2, $data['total_rows']
 		);
         $data['page']		= 'pages/product/index';
         $this->view($data);
@@ -52,7 +52,7 @@ class Product extends MY_Controller {
         ->get();
     $data['total_rows']	= $this->product->count();
     $data['pagination']	= $this->product->makePagination(
-        base_url('index.php/product'), 2, $data['total_rows']
+        base_url('index.php/product'), 3, $data['total_rows']
     );
 		$data['total_rows']	= $this->product->like('product.title',$keyword)->orLike('description',$keyword)->count();
 		$data['pagination']	= $this->product->makePagination(

@@ -44,6 +44,7 @@ class Register_model extends MY_Model
 				'label'	=> 'Konfirmasi Password',
 				'rules'	=> 'required|matches[password]',
 			],
+	
 		];
 
 		return $validationRules;
