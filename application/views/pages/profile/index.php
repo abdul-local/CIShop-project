@@ -14,7 +14,7 @@
                    <div class="card-body">
                        <p>Nama: <?= $content->name ?></p>
                        <p>Alamat Email: <?= $content->email ?></p>
-                       <a href="/update-profile.html" class="btn btn-primary">Edit</a>
+                       <a href="<?= base_url("index.php/profile/update/$content->id")?>" class="btn btn-primary">Edit</a>
                    </div>
                </div>
            </div>
