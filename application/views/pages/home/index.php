@@ -54,14 +54,14 @@
                         Pencarian
                     </div>
                     <div class="card-body">
-                        <form action="">
+                            <?= form_open(base_url("index.php/shop/search"),['method'=>'POST']) ?>
                             <div class="input-group">
-                                <input type="text" class="form-control">
+                            <input type="text" name="keyword" class="form-control form-control-sm text-center" placeholder="Cari" value="<?= $this->session->userdata('keyword') ?>">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-primary">Cari</button>
                                 </div>
                             </div>
-                        </form>
+                        <?= form_close() ?>
                     </div>
                 </div>
             </div>
