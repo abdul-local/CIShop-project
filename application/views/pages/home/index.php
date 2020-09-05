@@ -24,7 +24,7 @@
 							<h5 class="card-title"><?= $row->product_title ?></h5>
 							<p class="card-text"><strong>Rp<?= number_format($row->product_price, 0, ',', '.') ?>,-</strong></p>
 							<p class="card-text"><?= $row->product_description ?></p>
-							<a href="<?= base_url("index.php/shop/category/$row->category_title") ?>" class="badge badge-primary"><i class="fas fa-tags"></i> <?= $row->category_title ?></a>
+							<a href="<?= base_url("index.php/shop/category/$row->category_slug") ?>" class="badge badge-primary"><i class="fas fa-tags"></i> <?= $row->category_slug ?></a>
 						</div>
 						<div class="card-footer">
 							<form action="<?= base_url("index.php/cart/add") ?>" method="POST">
@@ -73,9 +73,10 @@
                         Kategori
                     </div>
                         <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Semua Kategori</li>
-                        <li class="list-group-item">Kategori 1</li>
-                        <li class="list-group-item">Kategori 2</li>
+                        <li class="list-group-item"><a href="<?= base_url() ?>">Semua Kategori</a></li>
+                        <?php foreach(getCategories() as $category) : ?>
+                        <li class="list-group-item"><a href="<?=base_url("index.php/shop/category/$category->slug")?>"><?= $category->title; ?></a></li>
+                        <?php endforeach ?>
                       </ul>
                 </div>
             </div>

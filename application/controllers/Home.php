@@ -12,6 +12,7 @@ class Home extends MY_Controller
                 'product.image', 
                 'product.price AS product_price', 'product.is_available',
                 'category.title AS category_title',
+                'category.slug AS category_slug',
             ]
         )
         ->join('category')
