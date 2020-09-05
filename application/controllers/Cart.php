@@ -15,6 +15,22 @@ class Cart extends MY_Controller {
         }
 
     }
+    // membuat method index
+    public function index(){
+        $data['title']='Keranjang Belanja';
+        $data['content']=$this->cart->select(
+            [
+                'cart.id','cart.qty','cart.subtotal',
+                'product.title ','product.image','product.price AS product_price',
+            ]
+        )
+        ->join('product')
+        ->where('cart.id_user',$this->id)
+        ->get();
+        $data['page']='pages/cart/index';
+        return $this->view($data);
+    }
+
     // buat method add
     public function add(){
         if(!$_POST || $this->input->post('qty') < 1){

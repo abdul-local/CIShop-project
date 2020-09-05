@@ -21,7 +21,7 @@
     </ul>
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a href="/cart.html" class="nav-link"><i class="fas fa-shopping-cart">Cart (0)</i></a>
+            <a href="<?= base_url("index.php/cart")?>" class="nav-link"><i class="fas fa-shopping-cart">Cart (<?= getCart() ?>)</i></a>
         </li>
         <?php if (!$this->session->userdata('is_login')) : ?>
         <li class="nav-item">
