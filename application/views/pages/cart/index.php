@@ -21,7 +21,7 @@
                     <?php foreach($content as $row) : ?>
                     <tr>
                         <td>
-                            <p><img src="<?= $row->image ? base_url("/images/product/$row->image"): base_url("/images/product/default.png") ?>" alt="" height="150"><strong><?= $row->title ?></strong></p>
+                            <p><img src="<?= $row->image ? base_url("/images/product/$row->image"): base_url("/images/product/default.png") ?>" alt="" height="100"><strong><?= $row->title ?></strong></p>
                         </td>
                         <td class="text-center">
                             Rp.<?= number_format($row->product_price,0,',','.') ?>,-
@@ -41,8 +41,9 @@
                         Rp.<?= number_format($row->subtotal,0,',','.') ?>,-
                         </td>
                         <td>
-                            <form action="">
-                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                            <form action="<?= base_url("index.php/cart/delete/$row->id")?>" method="POST">
+                            <input type="hidden" name="id" value="<?=$row->id ?>">
+                                <button class="btn btn-danger" type="submit" onclick = "return confirm('Apakah yakin akan menghapusnya ?') "><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </td>
                     </tr>

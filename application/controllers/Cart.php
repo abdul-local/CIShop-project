@@ -95,7 +95,7 @@ class Cart extends MY_Controller {
         ];
 
         $this->cart->table='cart';
-        
+
         if($this->cart->where('id',$id)->update($cart)){
             $this->session->set_flashdata('success','Data Berhasil di simpan');
         }else{
@@ -106,6 +106,22 @@ class Cart extends MY_Controller {
 
 
     }
+    // membeuat methdo delet
+    public function delete($id){
+    if(!$_POST){
+        redirect(base_url("index.php/cart/index"));
+    }
+    if(!$this->cart->where('id',$id)->first()){
+        $this->session->set_flashdata('warning','Maaf! Data tidak di temukan');
+        redirect(base_url("index.php/cart/index"));
+    }
+    if($this->cart->where('id',$id)->delete()){
+        $this->session->set_flashdata('succes','Data Berhasil di Hapus');
+    }else{
+        $this->session->set_flashdata('error','Opss! terjadi kesalahan');
+    }
+    redirect(base_url("index.php/cart/index"));
+}
 }
 
 
