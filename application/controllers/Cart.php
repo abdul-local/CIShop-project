@@ -85,16 +85,19 @@ class Cart extends MY_Controller {
         }
         $data['input']= (object) $this->input->post(null,true);
         $this->cart->table ='product';
-        $product=$this->cart->where('id',$iput->id_product)->first();
+        $product=$this->cart->where('id',$data['content']->id_product)->first();
         $subtotal =$product->price * $data['input']->qty;
+
         $cart=[
             'qty'=>$data['input']->qty,
-            'subtotal'=>$subtotal
+            'subtotal'=>$subtotal,
 
         ];
+
         $this->cart->table='cart';
+        
         if($this->cart->where('id',$id)->update($cart)){
-            $this->session->set_flashdata('success','Data Berhasik di simpab');
+            $this->session->set_flashdata('success','Data Berhasil di simpan');
         }else{
             $this->session->set_flashdata('error','Opps terjadi kesalahan');
         }

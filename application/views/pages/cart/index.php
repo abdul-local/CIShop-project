@@ -1,5 +1,6 @@
 <main role="main" class="container">
 <?php $this->load->view('layouts/_navbar') ?>
+<?php $this->load->view('layouts/_alert') ?>
 <div class="row">
   <div class="col-md-12">
     <div class="col mb-3">
@@ -26,9 +27,10 @@
                             Rp.<?= number_format($row->product_price,0,',','.') ?>,-
                         </td>
                         <td>
-                            <form action="">
+                            <form action="<?= base_url("index.php/cart/update/$row->id")?>" method="POST">
+                            <input type="hidden" name="id" value="<?= $row->id ?>">
                                 <div class="input-group">
-                                    <input type="number" value="<?= $row->qty ?>" class="form-control text-center">
+                                    <input type="number" name="qty" value="<?= $row->qty ?>" class="form-control text-center">
                                     <div class="input-group-append">
                                         <button class="btn btn-info" type="submit"><i class="fas fa-check"></i></button>
                                     </div>
