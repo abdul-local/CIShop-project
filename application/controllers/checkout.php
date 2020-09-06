@@ -35,7 +35,7 @@ class Checkout extends MY_Controller{
             redirect(base_url());
         }
 
-    $data['input'] = $input ? $input : (object) $this->input->getDefaultValidation();
+    $data['input'] = $input ? $input : (object) $this->checkout->geDefaultValues();
     $data['title'] ='Checkout';
     $data['page'] ='pages/checkout/index';
     return $this->view($data);
@@ -58,12 +58,12 @@ class Checkout extends MY_Controller{
             'invoice'=>$this->id.date('YmdHis'),
             'total'=>$total,
             'name'=>$input->name,
-            'adress'=>$input->adress,
+            'address'=>$input->address,
             'phone'=>$input->phone,
             'status'=>'waiting',
             
         ];
-        if($order=$this->checkout->create()){
+        if($order =$this->checkout->create($data)){
             $cart= $this->db->where('id_user',$this->id)
             ->get('cart')->result_array();
             foreach($cart as $row){

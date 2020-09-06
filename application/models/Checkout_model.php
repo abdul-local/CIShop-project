@@ -14,7 +14,7 @@ class Checkout_model extends MY_Model {
 
     }
     // buat method untuk validationRules
-    public function ValidationRules(){
+    public function getValidationRules(){
         $validationRules =[
             [
                 'field'=>'name',
@@ -31,6 +31,7 @@ class Checkout_model extends MY_Model {
                 'label'=>'Telepon',
                 'rules'=>'trim|required|max_length[15]',
             ],
+
             ];
         return $validationRules;
     }

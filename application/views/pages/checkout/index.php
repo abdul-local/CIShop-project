@@ -9,24 +9,24 @@
                 Formulir Alamat Pengiriman
             </div>
             <div class="card-footer">
-                <form action="">
+                <?= form_open(base_url("index.php/checkout/create"),['method'=>'POST']) ?>
                     <div class="form-group">
                         <label>Nama</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Masukan nama penerima">
-                        <small class="form-text text-danger">Nama harus diisi.</small>
+                        <?=form_input(['name'=>'name','type'=>'text'],$input->name,['class'=>'form-control','placeholder'=>'masukan nama penerima'])?>
+                        <?= form_error('name')?>
                     </div>
                     <div class="form-group">
                         <label >Alamat</label>
-                        <textarea name="adress" id="" cols="30" rows="5" class="form-control"></textarea>
-                        <small class="form-text text-danger">Alamat harus disi.</small>
+                        <?= form_textarea(['name'=>'address', 'value'=>$input->address,'row'=>'5' ,'class'=>'form-control']) ?>
+                        <?= form_error('address') ?>
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="text" class="form-control" name="phone" placeholder="Masukan nomer Telephon penerima">
-                        <small class="form-text text-danger">No telephon harus diisi.</small>
+                        <?= form_input(['name'=>'phone'],$input->phone,['class'=>'form-control','placeholder'=>'masukan nomer telephone'])?>
+                        <?= form_error('phone') ?>
                     </div>
                     <button class="btn btn-primary" type="submit">Simpan</button>
-                </form>
+                <?= form_close() ?>
             </div>
         </div>
     </div>
