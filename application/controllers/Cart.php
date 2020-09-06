@@ -71,6 +71,38 @@ class Cart extends MY_Controller {
             redirect(base_url());
         }
     }
+    // buat method untuk update
+    public function update($id){
+        if(!$_POST || $this->input->post('qty') < 1){
+            $this->session->set_flashdata('error','kuatitas yang anda masukan kurang dari 1');
+            redirect(base_url("index.php/cart/index"));
+        }
+        $data['content']=$this->cart->where('id',$id)->first();
+        // jika tidak ada data
+        if(!$data['content']){
+            $this->session->set_flashdata('waring','Data tidak di temukan');
+            redirect(base_url("index.php/cart/index"));
+        }
+        $data['input']= (object) $this->input->post(null,true);
+        $this->cart->table ='product';
+        $product=$this->cart->where('id',$iput->id_product)->first();
+        $subtotal =$product->price * $data['input']->qty;
+        $cart=[
+            'qty'=>$data['input']->qty,
+            'subtotal'=>$subtotal
+
+        ];
+        $this->cart->table='cart';
+        if($this->cart->where('id',$id)->update($cart)){
+            $this->session->set_flashdata('success','Data Berhasik di simpab');
+        }else{
+            $this->session->set_flashdata('error','Opps terjadi kesalahan');
+        }
+
+        redirect(base_url('index.php/cart/index'));
+
+
+    }
 }
 
 
