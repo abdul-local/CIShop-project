@@ -30,7 +30,7 @@ class Myorder extends MY_Controller
     }
     
     //membuat method detai detail order
-    
+
     public function detail($invoice){
        $data['order'] =$this->myorder->where('invoice',$invoice)->first();
        if(!$data['order']){
@@ -51,6 +51,12 @@ class Myorder extends MY_Controller
        $data['page']='pages/myorder/detail';
        $this->view($data);
 
+    }
+    //membuat method confirmasi order
+    public function confirm(){
+        
+    
+        
     }
 }
 
