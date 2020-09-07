@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct scribe allowed acces');
 class Myorder_model extends MY_Model
 {
 
-    protected $table = 'orders';
+    public $table = 'orders';
 
 }
 
