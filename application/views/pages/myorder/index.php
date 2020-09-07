@@ -18,24 +18,14 @@
                      </tr>
                  </thead>
                  <tbody>
+                     <?php foreach($content as $row) : ?>
                      <tr>
-                         <td><a href="/oders-detail.html"><strong>#0135674</strong></a></td>
-                         <td>2020/08/27</td>
-                         <td>Rp.200.000-</td>
-                         <td><span class="badge badge-pill badge-warning">Menunggu Pembayaran</span></td>
+                         <td><a href="/oders-detail.html"><strong>#<?= $row->invoice ?></strong></a></td>
+                         <td><?= $row->date ?></td>
+                         <td>Rp.<?=number_format($row->total,0,',','.') ?>-</td>
+                         <td><span class="badge badge-pill badge-warning"><?= $row->status ?></span></td>
                      </tr>
-                      <tr>
-                         <td><a href="/oders-detail.html"><strong>#0135739</strong></a></td>
-                         <td>2020/08/22</td>
-                         <td>Rp.200.000-</td>
-                         <td><span class="badge badge-pill badge-success">Dikirim</span></td>
-                     </tr>
-                      <tr>
-                         <td><a href="/oders-detail.html"><strong>#0134648</strong></a></td>
-                         <td>2020/07/20</td>
-                         <td>Rp.200.000-</td>
-                         <td><span class="badge badge-pill badge-danger">Dibatalkan</span></td>
-                     </tr>
+                     <?php endforeach ?>
                  </tbody>
              </table>
          </div> 
