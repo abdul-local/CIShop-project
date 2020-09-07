@@ -3,7 +3,7 @@
 <?php $this->load->view('layouts/_alert') ?>
 <div class="row">
   <div class="col-md-12">
-    <div class="col mb-3">
+    <div class="card mb-3">
         <div class="card-header">
            Keranjang Belanja
         </div>
