@@ -21,9 +21,9 @@
                      <?php foreach($content as $row) : ?>
                      <tr>
                          <td><a href="/oders-detail.html"><strong>#<?= $row->invoice ?></strong></a></td>
-                         <td><?= $row->date ?></td>
+                         <td><?= str_replace('-','/',date("d-m-Y",strtotime($row->date))) ?></td>
                          <td>Rp.<?=number_format($row->total,0,',','.') ?>-</td>
-                         <td><span class="badge badge-pill badge-warning"><?= $row->status ?></span></td>
+                         <td><?php $this->load->view("layouts/_status",['status'=>$row->status]) ?></td>
                      </tr>
                      <?php endforeach ?>
                  </tbody>
