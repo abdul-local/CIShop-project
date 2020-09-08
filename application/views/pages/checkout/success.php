@@ -16,7 +16,7 @@
                     <li>Sertakan keterangan dengan Nomer order: <strong><?=$invoice ?></strong></li>
                     <li>Total pembayaran: <strong>Rp <?= number_format($total,0,',','.')?>,-</strong></li>
                 </ol>
-                <p>Jika sudah, silahkan kirimkan bukti transfer di halaman konfirmasi atau bisa <a href="/orders-detail.html">Klik disini</a>!</p>
+                <p>Jika sudah, silahkan kirimkan bukti transfer di halaman konfirmasi atau bisa <a href="<?= base_url("index.php/myorder/detail/$content->invoice") ?>">Klik disini</a>!</p>
                 <a href="<?= base_url()?>" class="btn btn-primary"><i class="fas fa-angle-left">Kembali</i></a>
             </div>
         </div>

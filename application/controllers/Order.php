@@ -24,6 +24,33 @@ class Order extends MY_Controller {
         $this->view($data);
         
     }
+    // membuat method untuk search
+    public function search($page=null){
+        if(isset($_POST['keyword'])){
+            $this->session->set_userdata('keyword',$this->input->post('keyword'));
+        }else{
+            redirect(base_url("index.php/order"));
+        }
+       $keyword= $this->session->userdata('keyword');
+       $data['title']='Search:Order';
+        $data['content']=$this->order->like('invoice',$keyword)->orderBy('date','DESC')->paginate($page)->get();
+        $data['total_rows']=$this->order->like('invoice',$keyword)->count();
+        $data['pagination']=$this->order->makePagination(
+            base_url("index.php/order/search"),3,$data['total_rows']
+        );
+        $data['page']='pages/order/index';
+
+        $this->view($data);
+
+    }
+ //membuat method reset
+ public function reset(){
+    $this->session->unset_userdata('keyword');
+    redirect(base_url("index.php/order"));
+}
+//membuat method update status
+
+
     // buat method detail order
     public function detail($id){
         // cet dulu datanya
@@ -52,9 +79,9 @@ class Order extends MY_Controller {
         $this->view($data);
 
     }
-    //membuat method update status
+   
     public function update($id){
-        
+
         if(!$_POST){
             $this->session->set_flashdata('error','OPss Terjadi suatu kesalahan');
             redirect(base_url("index.php/order/detail/$id"));
