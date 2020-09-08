@@ -43,9 +43,9 @@
 								<small class="form-text text-danger"><?= $this->session->flashdata('image_error') ?></small>
 							<?php endif ?>
 						</div>
-					</div>
+                    </div>
 					<div class="card-footer">
-						<button type="submit" class="btn btn-success">Konfirmasi Pembayaran</button>
+                        <button type="submit" class="btn btn-success">Konfirmasi Pembayaran</button>
 					</div>
 				</form>
 			</div>

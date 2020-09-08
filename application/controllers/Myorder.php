@@ -47,6 +47,10 @@ class Myorder extends MY_Controller
        ->join('product')
        ->where('orders_detail.id_orders',$data['order']->id)
        ->get();
+       if($data['order'] !=='waiting'){
+           $this->myorder->table ='orders_confirm';
+           $data['orders_confirm']= $this->myorder->where('id_orders',$data['order']->id)->first();
+       }
 
        $data['page']='pages/myorder/detail';
        $this->view($data);
@@ -58,12 +62,12 @@ class Myorder extends MY_Controller
 		$data['order']	= $this->myorder->where('invoice', $invoice)->first();
 		if (!$data['order']) {
 			$this->session->set_flashdata('warning', 'Data tidak ditemukan.');
-			redirect(base_url('/myorder'));
+			redirect(base_url('index.php//myorder'));
 		}
 
 		if ($data['order']->status !== 'waiting') {
 			$this->session->set_flashdata('warning', 'Bukti transfer sudah dikiirm.');
-			redirect(base_url("myorder/detail/$invoice"));
+			redirect(base_url("index.php/myorder/detail/$invoice"));
 		}
 
 		if (!$_POST) {

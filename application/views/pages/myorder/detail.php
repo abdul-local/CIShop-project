@@ -49,14 +49,36 @@
                     <td colspan="3"><strong>Total: </strong></td>
                     <td class="text-center"><strong>Rp.<?= number_format(array_sum(array_column($orders_detail,'subtotal')),0,',','.')?>,-</strong></td>
                     </tr>
-                    
-                    
                 </tbody>
             </table>
          </div>
+         <?php if($order->status == 'waiting') : ?>
          <div class="card-footer">
              <a href="<?= base_url("index.php/myorder/confirm/$order->invoice") ?>" class="btn btn-success">Konfirmasi Pembayaran</a>
          </div>
+         <?php endif ?>
+         </div>
+         <?php if(isset($orders_confirm)) : ?>
+         <div class="row mb-3">
+             <div class="col-md-8">
+                 <div class="card">
+                     <div class="card-header">
+                         Bukti Transfer
+                     </div>
+                     <div class="card-body">
+                         <p>No Rekening:<?= $orders_confirm->account_number ?> </p>
+                         <p>Atas Nama:<?= $orders_confirm->account_name ?>  </p>
+                         <p>Nominal <?= $orders_confirm->nominal ?> :</p>
+                         <p>Catetan : <?= $orders_confirm->note ?> </p>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-md-4">
+                 
+                 <img src="<?= base_url("/images/confirm/$orders_confirm->image")?>" alt="">
+    
+         </div>
+         <?php endif ?>
      </div>
    </div>
    </div>
