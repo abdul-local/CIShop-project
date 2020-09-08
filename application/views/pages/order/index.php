@@ -1,4 +1,5 @@
 <main role="main" class="container">
+<?php $this->load->view('layouts/_alert') ?>
 <div class="col-md-10 mx-auto">
   <div class="card">
   <div class="card-header mb-3">
@@ -32,7 +33,7 @@
                  <tbody>
                      <?php foreach($content as $row) : ?>
                      <tr>
-                         <td><a href="/oders-detail.html"><strong>#<?=$row->invoice ?></strong></a></td>
+                         <td><a href="<?= base_url("index.php/order/detail/$row->id")?>"><strong>#<?=$row->invoice ?></strong></a></td>
                          <td><?=str_replace('-','/', $row->date) ?></td>
                          <td>Rp.<?= number_format($row->total,0,',','.')?>-</td>
                          <td><?php $this->load->view('layouts/_status',['status'=>$row->status])?></td>

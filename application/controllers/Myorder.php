@@ -62,7 +62,7 @@ class Myorder extends MY_Controller
 		$data['order']	= $this->myorder->where('invoice', $invoice)->first();
 		if (!$data['order']) {
 			$this->session->set_flashdata('warning', 'Data tidak ditemukan.');
-			redirect(base_url('index.php//myorder'));
+			redirect(base_url('index.php/myorder'));
 		}
 
 		if ($data['order']->status !== 'waiting') {
