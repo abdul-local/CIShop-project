@@ -52,6 +52,24 @@ class Order extends MY_Controller {
         $this->view($data);
 
     }
+    //membuat method update status
+    public function update($id){
+        
+        if(!$_POST){
+            $this->session->set_flashdata('error','OPss Terjadi suatu kesalahan');
+            redirect(base_url("index.php/order/detail/$id"));
+        }
+        if($this->order->where('id',$id)->update(['status'=>$this->input->post('status')])){
+
+            $this->session->set_flashdata('success','Data Berhasil diperbaharuhi');
+
+        }else{
+            $this->session->set_flashdata('error','Opps terjadi suatu kesalhan');
+        }
+        redirect(base_url("index.php/order/detail/$id"));
+
+    }
+ 
 }
 
 
