@@ -53,42 +53,65 @@ class Myorder extends MY_Controller
 
     }
     //membuat method confirmasi order
-    public function confirm($invoice){
-        $data['order']=$this->myorder->where('invoice',$invoice)->first();
-        if(!$data['order']){
-            $this->session->set_flashdata('error','Maaf data tidak ditmukan!');
-            redirect(base_url("index.php/myorder"));
-        }
-        if($data['order'] !== 'waiting'){
-            $this->sessio->set_flashdata('waring','Bukti Transfer sudah dikirim');
-            redirect(base_url("index.php/myorder/detil/$invoice"));
-        }
-        if(!$_POST){
-            $data['input']=$this->myorder->getDefaultValues();
+    public function confirm($invoice)
+	{
+		$data['order']	= $this->myorder->where('invoice', $invoice)->first();
+		if (!$data['order']) {
+			$this->session->set_flashdata('warning', 'Data tidak ditemukan.');
+			redirect(base_url('/myorder'));
+		}
 
-        }else{
-            $data['input']=$this->input->post(null,true);
-        }
-        if(!empaty($_FILES) && $_FILES['name']['image'] !=='' ){
-            $imageName=url_title($invoice,'-',true). '-'.date('YmdHis');
-           $upload= $this->myorder->uploadImage('image',$imageName);
-           if($upload){
-               $data['image'] =$upload['file_name'];
-           }else{
-               redirect(base_url("index.php/myorder/confirm"));
-           }
-        }
-        if(!$this->myorder->validate()){
-            $data['title']='Konfirmasi Pembayaran';
-            $data['form_action']=base_url("index.php/myorder/confirm");
-            $data['page']='pages/myorder/confirm';
-            $this->view($data);
-            return ;
+		if ($data['order']->status !== 'waiting') {
+			$this->session->set_flashdata('warning', 'Bukti transfer sudah dikiirm.');
+			redirect(base_url("myorder/detail/$invoice"));
+		}
 
-        }
-    
-        
-    }
+		if (!$_POST) {
+			$data['input']	= (object) $this->myorder->getDefaultValues();
+		} else {
+			$data['input']	= (object) $this->input->post(null, true);	
+		}
+
+		if (!empty($_FILES) && $_FILES['image']['name'] !== '') {
+			$imageName	= url_title($invoice, '-', true) . '-' . date('YmdHis');
+			$upload		= $this->myorder->uploadImage('image', $imageName);
+			if ($upload) {
+				$data['input']->image	= $upload['file_name'];
+			} else {
+				redirect(base_url("/index.php/myorder/confirm/$invoice"));
+			}
+		}
+
+		if (!$this->myorder->validate()) {
+			$data['title']			= 'Konfirmasi Order';
+			$data['form_action']	= base_url("index.php/myorder/confirm/$invoice");
+			$data['page']			= 'pages/myorder/confirm';
+
+			$this->view($data);
+			return;
+		}
+
+		$this->myorder->table = 'orders_confirm';
+
+		if ($this->myorder->create($data['input'])) {
+			$this->myorder->table = 'orders';
+			$this->myorder->where('id', $data['input']->id_orders)->update(['status' => 'paid']);
+			$this->session->set_flashdata('success', 'Data berhasil disimpan!');
+		} else {
+			$this->session->set_flashdata('error', 'Oops! Terjadi suatu kesalahan');
+		}
+
+		redirect(base_url("index.php/myorder/detail/$invoice"));
+	}
+
+	public function image_required()
+	{
+		if (empty($_FILES) || $_FILES['image']['name'] === '') {
+			$this->session->set_flashdata('image_error', 'Bukti transfer tidak boleh kosong!');
+			return false;
+		}
+		return true;
+	}
 }
 
 

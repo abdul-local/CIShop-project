@@ -2,13 +2,12 @@
 <?php $this->load->view('layouts/_alert') ?>
 <div class="row">
 <?php $this->load->view('layouts/_menu') ?>
-
     <div class="col-md-9">
        <div class="row mb-3">
             <div class="col-md-12">
                 <div class="card">
          <div class="card-header">
-             Detail Orders #<?= $order->invoice ?>
+            <strong> Detail Orders #<?= $order->invoice ?></strong>
              <div class="float-right">
                  <?php $this->load->view('layouts/_status',['status'=>$order->status]) ?>
              </div>
@@ -56,7 +55,7 @@
             </table>
          </div>
          <div class="card-footer">
-             <a href="/order.confirmasi.html" class="btn btn-success">Konfirmasi Pembayaran</a>
+             <a href="<?= base_url("index.php/myorder/confirm/$order->invoice") ?>" class="btn btn-success">Konfirmasi Pembayaran</a>
          </div>
      </div>
    </div>
